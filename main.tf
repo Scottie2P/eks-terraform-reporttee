@@ -71,7 +71,7 @@ module "eks" {
   version = "19.15.3"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.27"
+  cluster_version = "1.28"
 
   // get vpc_id, private_subnets from output of vpc module
   vpc_id     = module.vpc.vpc_id
@@ -98,14 +98,14 @@ module "eks" {
       desired_size = 1
     }
 
-    two = {
-      name = "node-group-2"
-      instance_types = ["t3.small"]
+    # two = {
+    #   name = "node-group-2"
+    #   instance_types = ["t3.small"]
 
-      min_size     = 1
-      max_size     = 2
-      desired_size = 1
-    }
+    #   min_size     = 1
+    #   max_size     = 2
+    #   desired_size = 1
+    # }
   }
 }
 
@@ -137,7 +137,7 @@ module "irsa-ebs-csi" {
 resource "aws_eks_addon" "ebs-csi" {
   cluster_name             = module.eks.cluster_name
   addon_name               = "aws-ebs-csi-driver"
-  addon_version            = "v1.20.0-eksbuild.1"
+  addon_version            = "v1.25.0-eksbuild.1"
   service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
   tags = {
     "eks_addon" = "ebs-csi"
