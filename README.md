@@ -15,7 +15,7 @@
     terraform apply tfplan 
   ```
 
-  3 connect cluster EKS 
+  3 connect cluster AWS EKS 
 
   ```
   aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
